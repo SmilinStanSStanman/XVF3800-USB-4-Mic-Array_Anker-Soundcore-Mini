@@ -1,4 +1,4 @@
-# XVF3800-USB-4-Mic-Array + MAX98357A + Speaker 3W
+# XVF3800-USB-4-Mic-Array + Anker Soundcore mini
 
 Esta es una guía paso a paso para crear un altavoz de Home Assistant Voice.
 
@@ -8,9 +8,9 @@ Seeed Studio XVF3800-USB-4-Mic-Array con ESP32-S3 integrado
 
 ![ESQUEMA XVF3800](docs/XVF3800-USB-4-Mic-Array.png)
 
-Amplificador MAX98357A
+Anker Soundcore mini
 
-![ESQUEMA XVF3800](docs/MAX98357A.png)
+![ESQUEMA XVF3800](docs/Anker_Soundcore_mini.jpg)
 
 **<ins>[ACTUALIZACION DE FIRMWARE DE XVF3800]</ins>**
 
