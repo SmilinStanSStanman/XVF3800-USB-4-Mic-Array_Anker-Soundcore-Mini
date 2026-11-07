@@ -12,14 +12,6 @@ Amplificador MAX98357A
 
 ![ESQUEMA XVF3800](docs/MAX98357A.png)
 
-Altavoz 3W 4ohm
-
-![ESQUEMA XVF3800](docs/speaker-4ohm-3W-1.25terminal.png)
-
-Conectores JST PH 2.0mm 2pines para unir terminal del altavoz a amplificador
-
-![ESQUEMA XVF3800](docs/Conectores-JST-PH-2.0mm-2pines.png)
-
 **<ins>[ACTUALIZACION DE FIRMWARE DE XVF3800]</ins>**
 
 Descarga [el firmware del ReSpeaker XVF3800](reSpeaker-XVF3800-firmware/reSpeaker_XVF3800_USB_4MIC_ARRAY-master.zip).
