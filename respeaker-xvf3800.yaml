@@ -1,10 +1,19 @@
 # ============================================================
 # reSpeaker XVF3800 + XIAO ESP32-S3
-# Variante de hardware: MAX98357A + altavoz pasivo de 3 W.
+# Variante de hardware: Anker Soundcore Mini conectado por AUX.
 #
 # Ruta de reproducción:
 # Media Player -> resamplers -> mixer -> salida I2S
-# -> MAX98357A externo -> altavoz pasivo.
+# -> circuito de audio integrado del reSpeaker -> jack 3,5 mm
+# -> entrada AUX del Anker.
+#
+# El Anker incorpora su propio amplificador.
+# No se utiliza un MAX98357A externo ni un altavoz pasivo.
+#
+# Alimentación:
+# El reSpeaker y el Anker requieren alimentación propia.
+# Si comparten una fuente y aparece zumbido, se utiliza
+# un aislador de audio en la conexión AUX o fuentes separadas.
 #
 # El archivo ok_nabu.flac debe estar junto a este YAML.
 # ============================================================
@@ -59,6 +68,9 @@ i2c:
 #
 # Se mantienen interfaces separadas para captura y reproducción.
 # El ESP32 trabaja en modo secundario en ambas.
+#
+# La salida I2S sigue siendo necesaria aunque el altavoz
+# esté conectado al jack AUX del reSpeaker.
 # ============================================================
 
 i2s_audio:
@@ -80,6 +92,8 @@ i2s_audio:
 
 # ============================================================
 # Captura de voz.
+# Los micrófonos utilizados son los del reSpeaker,
+# no el micrófono que pueda incorporar el Anker.
 # ============================================================
 
 microphone:
@@ -109,18 +123,19 @@ microphone:
 # ============================================================
 # Reproducción.
 #
-# Para la variante MAX98357A:
-# GPIO44 -> DIN del amplificador.
-# GPIO7  -> LRC/LRCLK del amplificador.
-# GPIO8  -> BCLK del amplificador.
+# Esta cadena envía el audio digital al circuito de audio
+# integrado del reSpeaker, cuya salida analógica se conecta
+# al Anker mediante un cable jack de 3,5 mm.
 #
-# El altavoz pasivo se conecta a las dos salidas de altavoz
-# del MAX98357A, no directamente al ESP32.
+# No existe un componente ESPHome específico para el Anker:
+# recibe audio analógico por AUX y lo amplifica por sí mismo.
 # ============================================================
 
 speaker:
-  # Salida digital I2S hacia el MAX98357A.
-  # No controla un pin de apagado ni una ganancia física del módulo.
+  # Salida digital I2S hacia el audio integrado del reSpeaker.
+  # GPIO44 transporta los datos de reproducción.
+  # dac_type: external se refiere a un DAC externo al ESP32;
+  # no implica que siga instalado el MAX98357A.
   - platform: i2s_audio
     id: respeaker_speaker
     i2s_audio_id: i2s_output
@@ -157,6 +172,9 @@ speaker:
 # ============================================================
 # Reproductor multimedia.
 # Dos rutas: anuncios y reproducción multimedia.
+#
+# El volumen y el silencio de este reproductor actúan sobre
+# el audio enviado al Anker, no sobre sus botones físicos.
 # ============================================================
 
 media_player:
@@ -707,7 +725,8 @@ switch:
       - script.execute: rearmar_palabra_activacion
 
   # Silencio del reproductor: afecta a música, tono y respuestas.
-  # Lee el estado real; no es un interruptor de apagado del MAX98357A.
+  # Lee el estado real del Media Player.
+  # No apaga el Anker ni controla su volumen físico.
   # No afecta a la captura del micrófono.
   - platform: template
     name: "Silenciar altavoz"
