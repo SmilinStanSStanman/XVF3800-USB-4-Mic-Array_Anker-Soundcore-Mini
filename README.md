@@ -77,16 +77,6 @@ dfu-util.exe -R -e -a 1 -D "C:\XVF3800\firmware.bin"
 
 Espera a que termine la transferencia y vuelva a aparecer el indicador de comandos. En ese momento, desconecta el USB del puerto XMOS. El flasheo está completado.
 
-**<ins>[CABLEADO]</ins>**
-
-![WIRING DIAGRAM](docs/ESP32-S3-PINS-RESPEAKER.png)
-
-![WIRING DIAGRAM](docs/max98357a.png)
-
-![WIRING DIAGRAM](docs/cableado.png)
-
-El altavoz 3W se conecta al amplificador MAX98357A conectando el cable negro al conector "-" y el cable rojo al conector "+".
-
 **<ins>[FLASHEAR EL ESP32-S3]</ins>**
 
 Se conecta el ESP32 de la placa XVF3800 al PC y se flashea como cualquier otro ESP32 con ESPhome en Home Assistant. Se utiliza [este código YAML](respeaker-xvf3800.yaml)
